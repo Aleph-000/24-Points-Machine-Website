@@ -1,0 +1,78 @@
+﻿<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>24 Points Machine · Hegel Infix</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Barlow+Semi+Condensed:wght@400;600;700&family=ZCOOL+XiaoWei&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.css" />
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+  <main class="page">
+    <header class="hero">
+      <div class="hero-title">24 Points Machine</div>
+      <p class="hero-subtitle">基于 Hegel Infix.cpp 的求解引擎，输入数字即可生成所有等于 24 的表达式。</p>
+      <div class="hero-strip">
+        <span>支持多解</span>
+        <span>LaTeX 排版</span>
+        <span>快速可视化</span>
+      </div>
+    </header>
+
+    <section class="card input-card">
+      <div class="card-head">
+        <h2>输入数字</h2>
+        <span class="badge">空格 / 逗号分隔</span>
+      </div>
+      <p class="hint">示例：3 3 8 8 或 1, 5, 5, 5。支持 2~8 个整数。</p>
+      <div class="input-row">
+        <input id="numbers-input" type="text" placeholder="请输入数字，例如：3 3 8 8" />
+        <button id="solve-btn" class="primary">开始计算</button>
+      </div>
+      <div class="input-actions">
+        <div class="select-group">
+          <label for="limit-select">最多显示</label>
+          <select id="limit-select">
+            <option value="20">20 条</option>
+            <option value="50">50 条</option>
+            <option value="200" selected>200 条</option>
+            <option value="500">500 条</option>
+          </select>
+        </div>
+        <div class="examples">
+          <span class="example-label">快速示例：</span>
+          <button class="ghost example-btn" data-value="3 3 8 8">3 3 8 8</button>
+          <button class="ghost example-btn" data-value="1 5 5 5">1 5 5 5</button>
+          <button class="ghost example-btn" data-value="7 7 3 3">7 7 3 3</button>
+        </div>
+      </div>
+      <div id="status" class="status">准备就绪。</div>
+    </section>
+
+    <section class="card output-card">
+      <div class="card-head">
+        <h2>计算结果</h2>
+        <span id="count-badge" class="badge outline">0 条</span>
+      </div>
+      <div id="output" class="output"></div>
+      <div id="empty-state" class="empty-state">还没有结果，输入数字后点击“开始计算”。</div>
+    </section>
+  </main>
+
+  <footer class="footer">
+    <div>24 Points Machine · Powered by Hegel Infix.cpp</div>
+    <div class="footer-note">结果以 LaTeX 形式渲染，每行一条表达式。</div>
+  </footer>
+
+  <script>
+    window.Module = window.Module || {};
+    window.Module.locateFile = (path) => path;
+  </script>
+  <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.js"></script>
+  <script defer src="hegel.js"></script>
+  <script defer src="app.js"></script>
+</body>
+</html>

@@ -1,0 +1,11 @@
+﻿{
+  "name": "24-points-machine-website",
+  "version": "1.0.0",
+  "private": true,
+  "description": "24 Points Machine web UI powered by Hegel Infix.cpp",
+  "main": "server.js",
+  "scripts": {
+    "start": "node server.js",
+    "build:wasm": "em++ \"Hegel Infix.cpp\" -O3 -DHEGEL_WASM -s ENVIRONMENT=web -s ALLOW_MEMORY_GROWTH=1 -s EXPORTED_FUNCTIONS='[_hegel_solve]' -s EXPORTED_RUNTIME_METHODS='[\"cwrap\"]' -o hegel.js"
+  }
+}
