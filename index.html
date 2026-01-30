@@ -1,20 +1,24 @@
 ﻿<!doctype html>
 <html lang="zh-CN">
+
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>24 Points Machine · Hegel Infix</title>
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=Barlow+Semi+Condensed:wght@400;600;700&family=ZCOOL+XiaoWei&display=swap" rel="stylesheet" />
+  <link
+    href="https://fonts.googleapis.com/css2?family=Barlow+Semi+Condensed:wght@400;600;700&family=ZCOOL+XiaoWei&display=swap"
+    rel="stylesheet" />
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.css" />
   <link rel="stylesheet" href="styles.css" />
 </head>
+
 <body>
   <main class="page">
     <header class="hero">
       <div class="hero-title">24 Points Machine</div>
-      <p class="hero-subtitle">基于 Hegel Infix.cpp 的求解引擎，输入数字即可生成所有等于 24 的表达式。</p>
+      <p class="hero-subtitle">基于 Hegel Infix.cpp 的求解引擎，输入数字即可生成所有等于 24 的表达式</p>
       <div class="hero-strip">
         <span>支持多解</span>
         <span>LaTeX 排版</span>
@@ -33,20 +37,116 @@
         <button id="solve-btn" class="primary">开始计算</button>
       </div>
       <div class="input-actions">
-        <div class="select-group">
-          <label for="limit-select">最多显示</label>
-          <select id="limit-select">
-            <option value="20">20 条</option>
-            <option value="50">50 条</option>
-            <option value="200" selected>200 条</option>
-            <option value="500">500 条</option>
-          </select>
-        </div>
+        <!-- New Random Button -->
+        <button id="random-btn" class="primary ghost-blue">
+          <span class="icon">🎲</span> 随机发牌
+        </button>
+
+        <!-- Examples moved here -->
         <div class="examples">
-          <span class="example-label">快速示例：</span>
-          <button class="ghost example-btn" data-value="3 3 8 8">3 3 8 8</button>
-          <button class="ghost example-btn" data-value="1 5 5 5">1 5 5 5</button>
-          <button class="ghost example-btn" data-value="7 7 3 3">7 7 3 3</button>
+          <!-- <span class="example-label">快速示例：</span> -->
+        </div>
+
+        <!-- Rules & Settings Button Group -->
+        <div class="button-group">
+          <!-- Rules Toggle -->
+          <div class="rules-container">
+            <button id="rules-btn" class="ghost icon-only" title="规则">
+              <span class="icon">📜</span>
+            </button>
+            <div class="rules-tooltip">
+              <h3>游戏规则</h3>
+              <p>使用给定的数字，通过运算构造出24。</p>
+              <div class="rules-list">
+                <span><strong>+ - * /</strong> 四则运算</span>
+                <span><strong>sqrt(x)</strong> 根号</span>
+                <span><strong>x!</strong> 阶乘 (4!不被允许)</span>
+                <span><strong>lg/lb/log</strong> 对数运算</span>
+              </div>
+              <p class="rules-extra">支持 2~8 张牌 · 目标可自定义</p>
+            </div>
+          </div>
+
+          <!-- Settings Toggle -->
+          <button id="settings-toggle" class="ghost icon-only" title="设置">
+            <span class="gear-icon">⚙️</span>
+          </button>
+        </div>
+      </div>
+
+      <!-- Collapsible Settings Panel -->
+      <div id="settings-panel" class="settings-panel collapsed">
+        <div class="settings-grid">
+          <div class="setting-item">
+            <label for="limit-select">最多显示</label>
+            <select id="limit-select">
+              <option value="20">20 条</option>
+              <option value="50">50 条</option>
+              <option value="200" selected>200 条</option>
+              <option value="500">500 条</option>
+            </select>
+          </div>
+          <div class="setting-item">
+            <label for="card-count">卡牌数量</label>
+            <select id="card-count">
+              <option value="3">3 张</option>
+              <option value="4" selected>4 张</option>
+              <option value="5">5 张</option>
+              <option value="6">6 张</option>
+            </select>
+          </div>
+          <div class="setting-item">
+            <label for="min-number">最小点数</label>
+            <input id="min-number" type="number" min="1" max="99" value="1" />
+          </div>
+          <div class="setting-item">
+            <label for="max-number">最大点数</label>
+            <input id="max-number" type="number" min="1" max="99" value="80" />
+          </div>
+        </div>
+
+        <!-- Advanced Divider -->
+        <div class="settings-divider">
+            <span>高级参数</span>
+        </div>
+
+        <div class="settings-grid advanced-grid">
+            <div class="setting-item">
+                <label>目标点数</label>
+                <input id="target-input" type="number" value="24" />
+            </div>
+            <div class="setting-item">
+                <label>最大深度</label>
+                <input id="max-nest" type="number" min="1" max="10" value="4" />
+            </div>
+            <div class="setting-item">
+                <label>根号限制</label>
+                <input id="max-sqrt" type="number" min="0" max="5" value="2" />
+            </div>
+            <div class="setting-item">
+                <label>阶乘限制 (!)</label>
+                <input id="max-fact" type="number" min="0" max="5" value="2" />
+            </div>
+            <div class="setting-item">
+                <label>lg 限制</label>
+                <input id="max-lg" type="number" min="0" max="5" value="1" placeholder="lg" title="lg (base 10)" />
+            </div>
+            <div class="setting-item">
+                <label>lb 限制</label>
+                <input id="max-lb" type="number" min="0" max="5" value="2" placeholder="lb" title="lb (base 2)" />
+            </div>
+            <div class="setting-item">
+                <label>log 限制</label>
+                <input id="max-log" type="number" min="0" max="5" value="1" placeholder="log" title="log (base a)" />
+            </div>
+            <div class="setting-item checkbox-item">
+                <input type="checkbox" id="no-neg" checked />
+                <label for="no-neg">禁止中间负数</label>
+            </div>
+            <div class="setting-item checkbox-item">
+                <input type="checkbox" id="only-math" />
+                <label for="only-math">仅四则运算</label>
+            </div>
         </div>
       </div>
       <div id="status" class="status">准备就绪。</div>
@@ -63,8 +163,8 @@
   </main>
 
   <footer class="footer">
-    <div>24 Points Machine · Powered by Hegel Infix.cpp</div>
-    <div class="footer-note">结果以 LaTeX 形式渲染，每行一条表达式。</div>
+    <div>24 Points Machine · Developed by @Aleph_null</div>
+
   </footer>
 
   <script>
@@ -75,4 +175,5 @@
   <script defer src="hegel.js"></script>
   <script defer src="app.js"></script>
 </body>
+
 </html>

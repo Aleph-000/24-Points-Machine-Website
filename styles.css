@@ -306,3 +306,215 @@ button.ghost:hover {
     width: fit-content;
   }
 }
+
+/* Settings Panel */
+.settings-panel {
+  margin-top: 16px;
+  overflow: hidden;
+  max-height: 1200px;
+  opacity: 1;
+  transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+  background: var(--bg-accent);
+  border-radius: 14px;
+  border: 1px solid rgba(47, 111, 228, 0.08);
+}
+
+.settings-panel.collapsed {
+  max-height: 0;
+  opacity: 0;
+  margin-top: 0;
+  border-width: 0;
+}
+
+.settings-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+  gap: 16px;
+  padding: 20px;
+}
+
+.setting-item {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.setting-item label {
+  font-size: 0.85rem;
+  font-weight: 600;
+  color: var(--muted);
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+.setting-item select,
+.setting-item input {
+  width: 100%;
+  padding: 10px 14px;
+  border-radius: 10px;
+  border: 1px solid var(--border);
+  background: #fff;
+  font-family: inherit;
+  font-size: 0.95rem;
+  color: var(--text);
+}
+
+/* Ghost Blue Button (for Random) */
+.ghost-blue {
+    background: rgba(47, 111, 228, 0.1);
+    color: var(--primary);
+    box-shadow: none;
+}
+.ghost-blue:hover {
+    background: rgba(47, 111, 228, 0.2);
+    transform: translateY(-1px);
+}
+
+.input-actions {
+    justify-content: space-between;
+}
+
+.icon-only {
+    padding: 10px 14px;
+    font-size: 1.2rem;
+    line-height: 1;
+}
+
+/* Advanced Settings */
+.settings-divider {
+    grid-column: 1 / -1;
+    display: flex;
+    align-items: center;
+    color: var(--primary);
+    font-size: 0.85rem;
+    font-weight: 700;
+    margin: 10px 20px 0;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    border-bottom: 2px solid rgba(47, 111, 228, 0.1);
+    padding-bottom: 6px;
+}
+
+.advanced-grid {
+    background: rgba(47, 111, 228, 0.03);
+}
+
+
+/* Checkbox alignment */
+.checkbox-item {
+    flex-direction: row;
+    align-items: center;
+    padding-top: 24px;
+}
+
+.checkbox-item input {
+    width: auto;
+    margin: 0;
+}
+
+.checkbox-item label {
+    margin: 0;
+    text-transform: none;
+    cursor: pointer;
+}
+
+/* Button Group for Rules + Settings */
+.button-group {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+}
+
+/* Rules Tooltip */
+.rules-container {
+  position: relative;
+  display: inline-flex;
+}
+
+.rules-tooltip {
+  position: absolute;
+  top: 100%;
+  right: 0; /* Align to right edge */
+  margin-top: 12px;
+  width: 280px;
+  background: rgba(255, 255, 255, 0.95);
+  backdrop-filter: blur(12px);
+  padding: 20px;
+  border-radius: 16px;
+  box-shadow: 
+    0 10px 40px -10px rgba(47, 111, 228, 0.2),
+    0 0 0 1px rgba(255, 255, 255, 0.5) inset;
+  opacity: 0;
+  visibility: hidden;
+  transform: translateY(-10px) scale(0.98);
+  transition: all 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
+  z-index: 100;
+  color: var(--text-secondary);
+  text-align: left;
+  pointer-events: none;
+}
+
+.rules-container.active .rules-tooltip {
+  opacity: 1;
+  visibility: visible;
+  transform: translateY(0) scale(1);
+  pointer-events: auto;
+}
+
+.rules-tooltip h3 {
+  margin: 0 0 8px 0;
+  color: var(--primary);
+  font-size: 1.1em;
+  font-weight: 700;
+}
+
+.rules-tooltip p {
+  margin: 0 0 12px 0;
+  font-size: 0.9em;
+  line-height: 1.5;
+}
+
+.rules-list {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  background: rgba(47, 111, 228, 0.05);
+  padding: 12px;
+  border-radius: 8px;
+  margin-bottom: 12px;
+}
+
+.rules-list span {
+  font-size: 0.85em;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.rules-list strong {
+  color: var(--primary-dark);
+  font-family: inherit;
+  width: 80px;
+}
+
+.rules-extra {
+  font-size: 0.8em !important;
+  color: var(--muted);
+  border-top: 1px solid rgba(0,0,0,0.06);
+  padding-top: 8px;
+  margin-bottom: 0 !important;
+}
+
+/* Arrow for tooltip */
+.rules-tooltip::before {
+  content: '';
+  position: absolute;
+  top: -6px;
+  right: 20px;
+  width: 12px;
+  height: 12px;
+  background: white;
+  transform: rotate(45deg);
+  border-left: 1px solid rgba(255,255,255,0.5);
+  border-top: 1px solid rgba(255,255,255,0.5);
+}
