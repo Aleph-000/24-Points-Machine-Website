@@ -1,0 +1,11 @@
+spec:
+  name: twentyfour-points-machine
+  static_sites:
+    - name: web
+      environment_slug: html
+      git:
+        repo_clone_url: https://github.com/Aleph-000/24-Points-Machine-Website.git
+        branch: main
+      source_dir: /do-static
+      output_dir: /
+      index_document: index.html
